@@ -13,21 +13,28 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import { sendNewVersionNotification } from "@/commands/core";
 import { isPortableApp } from "@/commands/file";
+import { FORK_RELEASES_LATEST_API } from "@/constants/appInfo";
 import { useAppSettingsLoad } from "@/hooks/useAppSettingsLoad";
 import { type AppSettingsData, AppSettingsGroup } from "@/types/appSettings";
 import { appError, appInfo } from "@/utils/log";
 import { getPlatform } from "@/utils/platform";
 
-const WEBSITE_URL = "https://snowshot.top/";
-
 export const getLatestVersion = async () => {
-	const response = await fetch(`${WEBSITE_URL}latest-version.txt`);
+	const response = await fetch(FORK_RELEASES_LATEST_API, {
+		method: "GET",
+	});
 	if (!response.ok) {
 		appError("Failed to get latest version:", response.statusText);
 		return;
 	}
 
-	return (await response.text()).trim();
+	const data = (await response.json()) as { tag_name?: string };
+	const tagName = data.tag_name?.trim();
+	if (!tagName) {
+		return;
+	}
+
+	return tagName.replace(/^v/i, "");
 };
 
 export const CheckVersion: React.FC = () => {

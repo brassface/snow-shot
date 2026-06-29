@@ -172,7 +172,7 @@ export const settings = {
 		"请输入 API 模型",
 	"settings.functionSettings.chatSettings.apiConfig.modelName": "模型名称",
 	"settings.functionSettings.chatSettings.apiConfig.modelName.tip":
-		"模型名称用于 Snow Shot 的展示",
+		"模型名称用于 Snow Shot Mini 的展示",
 	"settings.functionSettings.chatSettings.apiConfig.modelName.required":
 		"请输入模型名称",
 	"settings.functionSettings.chatSettings.apiConfig.supportThinking":
@@ -497,7 +497,7 @@ export const settings = {
 	"settings.systemSettings.screenshotSettings.tryGetElementByFocus":
 		"选取窗口元素增强",
 	"settings.systemSettings.screenshotSettings.tryGetElementByFocus.tip":
-		"启用后将为尝试选取的窗口元素提供焦点，以修复诸如浏览器等程序在无焦点时无法选取窗口元素的问题。当窗口堆叠排列的情况复杂时，底部窗口获取焦点后将遮挡顶部窗口，Snow Shot 会尝试恢复窗口的层级，如影响使用请禁用该功能。\n 白名单程序：{whiteList}",
+		"启用后将为尝试选取的窗口元素提供焦点，以修复诸如浏览器等程序在无焦点时无法选取窗口元素的问题。当窗口堆叠排列的情况复杂时，底部窗口获取焦点后将遮挡顶部窗口，Snow Shot Mini 会尝试恢复窗口的层级，如影响使用请禁用该功能。\n 白名单程序：{whiteList}",
 	"settings.systemSettings.screenshotSettings.tryGetElementByFocus.never":
 		"禁用",
 	"settings.systemSettings.screenshotSettings.tryGetElementByFocus.firefox":
@@ -586,7 +586,8 @@ export const settings = {
 	"settings.systemSettings.coreSettings": "核心",
 	"settings.systemSettings.coreSettings.hotLoadPageCount": "热加载页面数量",
 	"settings.systemSettings.coreSettings.hotLoadPageCount.tip":
-		"通过热加载页面，实现固定剪贴板内容到屏幕、视频录制、全屏画布等功能的快速加载，但同时提高了内存的占用",
+		"通过热加载页面，实现固定剪贴板内容到屏幕、全屏画布等功能的快速加载，但同时提高了内存的占用",
+	"settings.systemSettings.appInfo": "应用信息",
 	"settings.functionSettings.ocrSettings": "文本识别",
 	"settings.functionSettings.ocrSettings.htmlVisionModel": "视觉理解模型",
 	"settings.functionSettings.ocrSettings.htmlVisionModel.tip":

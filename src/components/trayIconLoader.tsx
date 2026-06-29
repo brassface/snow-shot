@@ -9,6 +9,7 @@ import { isEqual } from "es-toolkit";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { exitApp } from "@/commands";
+import { APP_NAME } from "@/constants/appInfo";
 import { AntdContext } from "@/contexts/antdContext";
 import { AppContext } from "@/contexts/appContext";
 import { AppSettingsPublisher } from "@/contexts/appSettingsActionContext";
@@ -236,7 +237,7 @@ const TrayIconLoaderComponent = () => {
 					(await defaultWindowIcon()) ??
 					""),
 			showMenuOnLeftClick: false,
-			tooltip: "Snow Shot",
+			tooltip: APP_NAME,
 			action: (event) => {
 				switch (event.type) {
 					case "Click":

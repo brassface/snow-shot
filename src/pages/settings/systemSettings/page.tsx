@@ -27,6 +27,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { restartWithAdmin } from "@/commands/core";
 import { createLocalConfigDir, getAppConfigBaseDir } from "@/commands/file";
+import { AppInfoPanel } from "@/components/appInfoPanel";
 import { ContentWrap } from "@/components/contentWrap";
 import { GroupTitle } from "@/components/groupTitle";
 import { IconLabel } from "@/components/iconLable";
@@ -1049,6 +1050,13 @@ export const SystemSettingsPage = () => {
 					</Row>
 				</ProForm>
 			</Spin>
+
+			<Divider />
+
+			<GroupTitle id="appInfo">
+				<FormattedMessage id="settings.systemSettings.appInfo" />
+			</GroupTitle>
+			<AppInfoPanel variant="compact" />
 		</ContentWrap>
 	);
 };

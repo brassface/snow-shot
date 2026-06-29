@@ -1,6 +1,6 @@
 {
 	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-	"productName": "Snow Shot",
+	"productName": "Snow Shot Mini",
 	"mainBinaryName": "snowshot",
 	"version": "0.7.9-beta",
 	"identifier": "com.chao.snowshot",
@@ -19,7 +19,7 @@
 				"fullscreen": false,
 				"height": 632,
 				"maximizable": false,
-				"title": "Snow Shot",
+				"title": "Snow Shot Mini",
 				"width": 1024,
 				"center": true,
 				"decorations": true,
