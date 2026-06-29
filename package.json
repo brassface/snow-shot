@@ -23,6 +23,9 @@
 		"dev:rsdoctor": "cross-env RSDOCTOR=true rsbuild dev",
 		"build:rsdoctor": "cross-env RSDOCTOR=true rsbuild build",
 		"build:analyze": "cross-env BUNDLE_ANALYZE=true pnpm build",
+		"tauri:build": "tauri build",
+		"build:windows": "powershell -ExecutionPolicy Bypass -File ./scripts/build-windows.ps1",
+		"package:windows": "powershell -ExecutionPolicy Bypass -File ./scripts/package-windows.ps1",
 		"prepare": "husky"
 	},
 	"dependencies": {

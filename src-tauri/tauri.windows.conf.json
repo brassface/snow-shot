@@ -13,7 +13,7 @@
 		}
 	},
 	"bundle": {
-		"createUpdaterArtifacts": true,
+		"createUpdaterArtifacts": false,
 		"active": true,
 		"category": "Utility",
 		"shortDescription": "Snow Shot Mini",

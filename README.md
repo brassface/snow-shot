@@ -117,6 +117,28 @@ Release 安装包发布于本仓库的 [Releases](https://github.com/brassface/s
 
 > Mini 版不需要 FFmpeg，可跳过开发文档中的「视频录制环境」步骤。
 
+### Windows 打包（安装包 + 绿色版）
+
+```bash
+# 一键构建：前端 + Tauri + 安装包 + 绿色版 zip
+pnpm build:windows
+
+# 若已完成 tauri build，仅重新打包产物
+pnpm package:windows
+```
+
+产物输出到 `packages/windows/`：
+
+| 文件 | 说明 |
+| --- | --- |
+| `Snow Shot Mini_x.x.x_x64-setup.exe` | NSIS 安装包 |
+| `Snow-Shot-Mini_x.x.x_x64-portable.zip` | 绿色版压缩包，解压后运行 `snowshot.exe` |
+| `Snow-Shot-Mini_x.x.x_x64-portable/` | 绿色版文件夹（含 `__portable` 标记，配置保存在同目录） |
+
+绿色版使用说明：解压 zip 后，直接双击 `snowshot.exe` 即可运行，无需安装。需系统已安装 [WebView2 运行时](https://developer.microsoft.com/microsoft-edge/webview2/)。
+
+打包前请关闭正在运行的 `snowshot.exe`，否则可能因 DLL 被占用导致构建失败。
+
 ## 许可证与版权声明
 
 ### 上游版权

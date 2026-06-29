@@ -3,6 +3,7 @@
 # Dist
 node_modules
 dist/
+packages/
 
 # Profile
 .rspack-profile-*/
