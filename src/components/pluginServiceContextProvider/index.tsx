@@ -7,12 +7,7 @@ import {
 	pluginInit,
 	pluginRegisterPlugin,
 } from "@/commands/plugin";
-import {
-	PLUGIN_ID_AI_CHAT,
-	PLUGIN_ID_FFMPEG,
-	PLUGIN_ID_RAPID_OCR,
-	PLUGIN_ID_TRANSLATE,
-} from "@/constants/pluginService";
+import { PLUGIN_ID_RAPID_OCR } from "@/constants/pluginService";
 import { PluginServiceContext } from "@/contexts/pluginServiceContext";
 import { useStateRef } from "@/hooks/useStateRef";
 import { PluginStatus, type PluginStatusResult } from "@/types/commands/plugin";
@@ -22,7 +17,6 @@ import {
 	type PluginStatusRecord,
 } from "@/types/components/pluginService";
 import { getAppConfigBaseDirWithCache } from "@/utils/environment";
-import { getPlatform } from "@/utils/platform";
 
 export const PluginServiceContextProvider: React.FC<{
 	children: React.ReactNode;
@@ -38,18 +32,6 @@ export const PluginServiceContextProvider: React.FC<{
 					"ch_PP-OCRv4_rec_infer.onnx",
 					"ch_PP-OCRv5_rec_mobile_infer.onnx",
 				],
-			},
-			{
-				id: PLUGIN_ID_FFMPEG,
-				file_list: getPlatform() === "windows" ? ["ffmpeg.exe"] : ["ffmpeg"],
-			},
-			{
-				id: PLUGIN_ID_TRANSLATE,
-				file_list: [],
-			},
-			{
-				id: PLUGIN_ID_AI_CHAT,
-				file_list: [],
 			},
 		];
 	}, []);

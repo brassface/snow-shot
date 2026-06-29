@@ -25,8 +25,7 @@
 			"certificateThumbprint": null,
 			"digestAlgorithm": "sha256",
 			"webviewInstallMode": {
-				"silent": true,
-				"type": "embedBootstrapper"
+				"type": "skip"
 			},
 			"nsis": {
 				"template": "./build-configs/installer.nsi",
@@ -46,7 +45,9 @@
 			"icons/icon.ico"
 		],
 		"resources": {
-			"app-icons/": "app-icons/"
+			"app-icons/": "app-icons/",
+			"bin/onnxruntime.dll": "onnxruntime.dll",
+			"bin/onnxruntime_providers_shared.dll": "onnxruntime_providers_shared.dll"
 		}
 	}
 }

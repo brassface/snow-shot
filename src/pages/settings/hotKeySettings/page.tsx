@@ -14,11 +14,7 @@ import {
 	defaultDrawToolbarKeyEventComponentConfig,
 	defaultDrawToolbarKeyEventSettings,
 } from "@/constants/drawToolbarKeyEvent";
-import {
-	PLUGIN_ID_AI_CHAT,
-	PLUGIN_ID_RAPID_OCR,
-	PLUGIN_ID_TRANSLATE,
-} from "@/constants/pluginService";
+import { PLUGIN_ID_RAPID_OCR } from "@/constants/pluginService";
 import { AppSettingsActionContext } from "@/contexts/appSettingsActionContext";
 import { usePluginServiceContext } from "@/contexts/pluginServiceContext";
 import { useAppSettingsLoad } from "@/hooks/useAppSettingsLoad";
@@ -95,13 +91,6 @@ export const HotKeySettingsPage = () => {
 					return isReadyStatus?.(PLUGIN_ID_RAPID_OCR);
 				}
 
-				if (key === DrawToolbarKeyEventKey.OcrTranslateTool) {
-					return (
-						isReadyStatus?.(PLUGIN_ID_RAPID_OCR) &&
-						isReadyStatus?.(PLUGIN_ID_TRANSLATE)
-					);
-				}
-
 				return true;
 			})
 			.map((key) => {
@@ -148,8 +137,6 @@ export const HotKeySettingsPage = () => {
 
 	const keyEventFormItemList = useMemo(() => {
 		const groupFormItemMap: Record<CommonKeyEventGroup, React.ReactNode[]> = {
-			[CommonKeyEventGroup.Translation]: [],
-			[CommonKeyEventGroup.Chat]: [],
 			[CommonKeyEventGroup.FixedContent]: [],
 		};
 
@@ -209,59 +196,51 @@ export const HotKeySettingsPage = () => {
 				className="settings-form common-settings-form"
 				form={commonKeyEventForm}
 			>
-				{keyEventFormItemListKeys
-					.filter((configGroup) => {
-						if (configGroup === CommonKeyEventGroup.Chat) {
-							return isReadyStatus?.(PLUGIN_ID_AI_CHAT);
-						}
-
-						return true;
-					})
-					.map((configGroup, index) => {
-						return (
-							<div key={configGroup}>
-								<GroupTitle
-									id={configGroup}
-									extra={
-										<ResetSettingsButton
-											title={
-												<FormattedMessage
-													id={`settings.hotKeySettings.${configGroup}`}
-													key={configGroup}
-												/>
-											}
-											appSettingsGroup={AppSettingsGroup.CommonKeyEvent}
-											filter={(settings) => {
-												return Object.keys(settings).reduce(
-													(acc, key) => {
-														if (
-															commonKeyEvent[key as CommonKeyEventKey].group ===
-															configGroup
-														) {
-															acc[key] = settings[key];
-														}
-														return acc;
-													},
-													{} as Record<string, unknown>,
-												);
-											}}
-										/>
-									}
-								>
-									<FormattedMessage
-										id={`settings.hotKeySettings.${configGroup}`}
+				{keyEventFormItemListKeys.map((configGroup, index) => {
+					return (
+						<div key={configGroup}>
+							<GroupTitle
+								id={configGroup}
+								extra={
+									<ResetSettingsButton
+										title={
+											<FormattedMessage
+												id={`settings.hotKeySettings.${configGroup}`}
+												key={configGroup}
+											/>
+										}
+										appSettingsGroup={AppSettingsGroup.CommonKeyEvent}
+										filter={(settings) => {
+											return Object.keys(settings).reduce(
+												(acc, key) => {
+													if (
+														commonKeyEvent[key as CommonKeyEventKey].group ===
+														configGroup
+													) {
+														acc[key] = settings[key];
+													}
+													return acc;
+												},
+												{} as Record<string, unknown>,
+											);
+										}}
 									/>
-								</GroupTitle>
-								<Spin spinning={appSettingsLoading}>
-									<Row gutter={token.marginLG}>
-										{keyEventFormItemList[configGroup as CommonKeyEventGroup]}
-									</Row>
-								</Spin>
+								}
+							>
+								<FormattedMessage
+									id={`settings.hotKeySettings.${configGroup}`}
+								/>
+							</GroupTitle>
+							<Spin spinning={appSettingsLoading}>
+								<Row gutter={token.marginLG}>
+									{keyEventFormItemList[configGroup as CommonKeyEventGroup]}
+								</Row>
+							</Spin>
 
-								{index !== keyEventFormItemListKeys.length - 1 && <Divider />}
-							</div>
-						);
-					})}
+							{index !== keyEventFormItemListKeys.length - 1 && <Divider />}
+						</div>
+					);
+				})}
 			</Form>
 
 			<Divider />

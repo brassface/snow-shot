@@ -10,8 +10,6 @@ export const usePathname = () => {
 				pathname === "/fixedContent" ||
 				pathname === "/fullScreenDraw" ||
 				pathname === "/fullScreenDrawSwitchMouseThrough" ||
-				pathname === "/videoRecord" ||
-				pathname === "/videoRecordToolbar" ||
 				pathname === "/idle"
 			),
 		[pathname],

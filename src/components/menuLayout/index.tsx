@@ -19,14 +19,8 @@ import {
 	TrayIconLoader,
 	TrayIconStatePublisher,
 } from "@/components/trayIconLoader";
-import {
-	PLUGIN_ID_AI_CHAT,
-	PLUGIN_ID_FFMPEG,
-	PLUGIN_ID_TRANSLATE,
-} from "@/constants/pluginService";
 import { AppContext } from "@/contexts/appContext";
 import { AppSettingsActionContext } from "@/contexts/appSettingsActionContext";
-import { usePluginServiceContext } from "@/contexts/pluginServiceContext";
 import { useAppSettingsLoad } from "@/hooks/useAppSettingsLoad";
 import { withStatePublisher } from "@/hooks/useStatePublisher";
 import { en } from "@/messages/en";
@@ -116,7 +110,6 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 	);
 
 	const { token } = theme.useToken();
-	const { isReadyStatus } = usePluginServiceContext();
 	const router = useRouter();
 	const routes = useMemo(() => {
 		const routes: RouteItem[] = [
@@ -130,37 +123,7 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 						key: "screenshotFunction",
 						label: intl.formatMessage({ id: "home.screenshotFunction" }),
 					},
-					{
-						key: "chatFunction",
-						label: intl.formatMessage({ id: "home.chatFunction" }),
-					},
-					{
-						key: "translationFunction",
-						label: intl.formatMessage({ id: "home.translationFunction" }),
-					},
-					{
-						key: "videoRecordFunction",
-						label: intl.formatMessage({ id: "home.videoRecordFunction" }),
-					},
-					{
-						key: "otherFunction",
-						label: intl.formatMessage({ id: "home.otherFunction" }),
-					},
-				].filter((item) => {
-					if (item.key === "videoRecordFunction") {
-						return isReadyStatus?.(PLUGIN_ID_FFMPEG);
-					}
-
-					if (item.key === "chatFunction") {
-						return isReadyStatus?.(PLUGIN_ID_AI_CHAT);
-					}
-
-					if (item.key === "translationFunction") {
-						return isReadyStatus?.(PLUGIN_ID_TRANSLATE);
-					}
-
-					return true;
-				}),
+				],
 			},
 			{
 				key: "/tools",
@@ -169,30 +132,6 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 				icon: <ToolOutlined />,
 				tabs: [],
 				children: [
-					{
-						key: "/tools/translation",
-						path: "/tools/translation",
-						label: intl.formatMessage({ id: "menu.tools.translation" }),
-						hideTabs: true,
-						tabs: [
-							{
-								key: "translation",
-								label: intl.formatMessage({ id: "menu.tools.translation" }),
-							},
-						],
-					},
-					{
-						key: "/tools/chat",
-						path: "/tools/chat",
-						label: intl.formatMessage({ id: "menu.tools.chat" }),
-						hideTabs: true,
-						tabs: [
-							{
-								key: "chat",
-								label: intl.formatMessage({ id: "menu.tools.chat" }),
-							},
-						],
-					},
 					{
 						key: "/tools/captureHistory",
 						path: "/tools/captureHistory",
@@ -205,17 +144,7 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 							},
 						],
 					},
-				].filter((item) => {
-					if (item.key === "/tools/chat") {
-						return isReadyStatus?.(PLUGIN_ID_AI_CHAT);
-					}
-
-					if (item.key === "/tools/translation") {
-						return isReadyStatus?.(PLUGIN_ID_TRANSLATE);
-					}
-
-					return true;
-				}),
+				],
 			},
 			{
 				key: "/personalization",
@@ -322,27 +251,9 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 								}),
 							},
 							{
-								key: "translationSettings",
-								label: intl.formatMessage({
-									id: "settings.functionSettings.translationSettings",
-								}),
-							},
-							{
-								key: "chatSettings",
-								label: intl.formatMessage({
-									id: "settings.functionSettings.chatSettings",
-								}),
-							},
-							{
 								key: "fullScreenDrawSettings",
 								label: intl.formatMessage({
 									id: "settings.functionSettings.fullScreenDrawSettings",
-								}),
-							},
-							{
-								key: "videoRecordSettings",
-								label: intl.formatMessage({
-									id: "settings.functionSettings.videoRecordSettings",
 								}),
 							},
 							{
@@ -363,39 +274,13 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 									id: "settings.functionSettings.outputSettings",
 								}),
 							},
-						].filter((item) => {
-							if (item.key === "videoRecordSettings") {
-								return isReadyStatus?.(PLUGIN_ID_FFMPEG);
-							}
-
-							if (item.key === "translationSettings") {
-								return isReadyStatus?.(PLUGIN_ID_TRANSLATE);
-							}
-
-							if (item.key === "chatSettings") {
-								return isReadyStatus?.(PLUGIN_ID_AI_CHAT);
-							}
-
-							return true;
-						}),
+						],
 					},
 					{
 						key: "/settings/hotKeySettings",
 						path: "/settings/hotKeySettings",
 						label: intl.formatMessage({ id: "menu.settings.hotKeySettings" }),
 						tabs: [
-							{
-								key: "translation",
-								label: intl.formatMessage({
-									id: "settings.hotKeySettings.translation",
-								}),
-							},
-							{
-								key: "chat",
-								label: intl.formatMessage({
-									id: "settings.hotKeySettings.chat",
-								}),
-							},
 							{
 								key: "fixedContent",
 								label: intl.formatMessage({
@@ -406,17 +291,7 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 								key: "drawingHotKey",
 								label: intl.formatMessage({ id: "settings.drawingHotKey" }),
 							},
-						].filter((item) => {
-							if (item.key === "chat") {
-								return isReadyStatus?.(PLUGIN_ID_AI_CHAT);
-							}
-
-							if (item.key === "translation") {
-								return isReadyStatus?.(PLUGIN_ID_TRANSLATE);
-							}
-
-							return true;
-						}),
+						],
 					},
 					{
 						key: "/settings/systemSettings",
@@ -457,10 +332,6 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 								}),
 							},
 							{
-								key: "chatSettings",
-								label: intl.formatMessage({ id: "settings.chatSettings" }),
-							},
-							{
 								key: "coreSettings",
 								label: intl.formatMessage({
 									id: "settings.systemSettings.coreSettings",
@@ -472,13 +343,7 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 									id: "settings.systemSettings.dataFile",
 								}),
 							},
-						].filter(() => {
-							// if (item.key === 'chatSettings') {
-							//     return isReadyStatus?.(PLUGIN_ID_AI_CHAT);
-							// }
-
-							return true;
-						}),
+						],
 					},
 				],
 			},
@@ -497,7 +362,7 @@ const MenuLayoutCore: React.FC<{ children: React.ReactNode }> = ({
 		];
 
 		return routes;
-	}, [intl, isReadyStatus]);
+	}, [intl]);
 	const { menuItems, routeTabsMap } = useMemo(() => {
 		const routeTabsMap: Record<string, RouteMapItem> = {};
 

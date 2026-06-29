@@ -1164,33 +1164,10 @@ const DrawPageCore: React.FC<{
 			return;
 		} else if (
 			isOcrTool(getDrawState()) &&
-			(getAppSettings()[AppSettingsGroup.FunctionScreenshot].ocrCopyText ||
-				ocrResult?.ocrResultType === OcrResultType.VisionModelHtml ||
-				ocrResult?.ocrResultType === OcrResultType.VisionModelMarkdown)
+			getAppSettings()[AppSettingsGroup.FunctionScreenshot].ocrCopyText
 		) {
-			if (
-				ocrResult &&
-				(ocrResult.ocrResultType === OcrResultType.Ocr ||
-					ocrResult.ocrResultType === OcrResultType.Translated)
-			) {
+			if (ocrResult && ocrResult.ocrResultType === OcrResultType.Ocr) {
 				writeTextToClipboard(covertOcrResultToText(ocrResult.result));
-			} else if (
-				ocrResult &&
-				ocrResult.ocrResultType === OcrResultType.VisionModelHtml
-			) {
-				const html = getOcrResultIframeSrcDoc(
-					ocrResult.result.text_blocks[0].text,
-					ocrResult.ocrResultType,
-					undefined,
-					undefined,
-					undefined,
-				);
-				writeHtmlToClipboard(html);
-			} else if (
-				ocrResult &&
-				ocrResult.ocrResultType === OcrResultType.VisionModelMarkdown
-			) {
-				writeTextToClipboard(ocrResult.result.text_blocks[0].text);
 			}
 
 			finishCapture();

@@ -126,16 +126,12 @@ const EventListenerCore: React.FC<{ children: React.ReactNode }> = ({
 		isDrawPage,
 		isFullScreenDraw,
 		isFullScreenDrawSwitchMouseThrough,
-		isVideoRecordPage,
 		isIdlePage,
 		isFixedContentPage,
-		isVideoRecordToolbarPage,
 	} = useMemo(() => {
 		let isDrawPage = false;
 		let isFullScreenDraw = false;
 		let isFullScreenDrawSwitchMouseThrough = false;
-		let isVideoRecordPage = false;
-		let isVideoRecordToolbarPage = false;
 		let isIdlePage = false;
 		let isFixedContentPage = false;
 		if (pathname === "/draw") {
@@ -144,10 +140,6 @@ const EventListenerCore: React.FC<{ children: React.ReactNode }> = ({
 			isFullScreenDraw = true;
 		} else if (pathname === "/fullScreenDrawSwitchMouseThrough") {
 			isFullScreenDrawSwitchMouseThrough = true;
-		} else if (pathname === "/videoRecord") {
-			isVideoRecordPage = true;
-		} else if (pathname === "/videoRecordToolbar") {
-			isVideoRecordToolbarPage = true;
 		} else if (pathname === "/idle") {
 			isIdlePage = true;
 		} else if (pathname === "/fixedContent") {
@@ -158,8 +150,6 @@ const EventListenerCore: React.FC<{ children: React.ReactNode }> = ({
 			isDrawPage,
 			isFullScreenDraw,
 			isFullScreenDrawSwitchMouseThrough,
-			isVideoRecordPage,
-			isVideoRecordToolbarPage,
 			isIdlePage,
 			isFixedContentPage,
 		};
@@ -387,24 +377,6 @@ const EventListenerCore: React.FC<{ children: React.ReactNode }> = ({
 				});
 			}
 
-			if (isVideoRecordPage || isVideoRecordToolbarPage) {
-				defaultListener.push({
-					event: "reload-video-record",
-					callback: async () => {},
-				});
-				defaultListener.push({
-					event: "start-or-copy-video",
-					callback: async () => {},
-				});
-			}
-
-			if (isVideoRecordPage) {
-				defaultListener.push({
-					event: "change-video-record-state",
-					callback: async () => {},
-				});
-			}
-
 			if (isIdlePage || isFixedContentPage) {
 				defaultListener.push({
 					event: "hot-load-page-route-push",
@@ -475,8 +447,6 @@ const EventListenerCore: React.FC<{ children: React.ReactNode }> = ({
 		isDrawPage,
 		isFullScreenDraw,
 		isFullScreenDrawSwitchMouseThrough,
-		isVideoRecordPage,
-		isVideoRecordToolbarPage,
 		releaseOcrSessionAction,
 		refreshPluginStatusThrottle,
 		isIdlePage,

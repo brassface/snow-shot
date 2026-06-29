@@ -10,26 +10,6 @@ export const defaultCommonKeyEventSettings: Record<
 	CommonKeyEventKey,
 	CommonKeyEventValue
 > = {
-	[CommonKeyEventKey.CopyAndHide]: {
-		hotKey: getPlatformValue("Ctrl+Q", "Meta+Q"),
-		group: CommonKeyEventGroup.Translation,
-	},
-	[CommonKeyEventKey.Copy]: {
-		hotKey: getPlatformValue("Ctrl+C", "Meta+C"),
-		group: CommonKeyEventGroup.Translation,
-	},
-	[CommonKeyEventKey.ChatCopyAndHide]: {
-		hotKey: getPlatformValue("Ctrl+Q", "Meta+Q"),
-		group: CommonKeyEventGroup.Chat,
-	},
-	[CommonKeyEventKey.ChatCopy]: {
-		hotKey: getPlatformValue("Ctrl+C", "Meta+C"),
-		group: CommonKeyEventGroup.Chat,
-	},
-	[CommonKeyEventKey.ChatNewSession]: {
-		hotKey: getPlatformValue("Ctrl+N", "Meta+N"),
-		group: CommonKeyEventGroup.Chat,
-	},
 	[CommonKeyEventKey.FixedContentEnableDraw]: {
 		hotKey: getPlatformValue("Ctrl+E", "Meta+E"),
 		group: CommonKeyEventGroup.FixedContent,
@@ -50,10 +30,6 @@ export const defaultCommonKeyEventSettings: Record<
 		hotKey: getPlatformValue("Ctrl+C", "Meta+C"),
 		group: CommonKeyEventGroup.FixedContent,
 	},
-	// [CommonKeyEventKey.FixedContentCopyRawToClipboard]: {
-	//     hotKey: getPlatformValue('Ctrl+Shift+C', 'Meta+Shift+C'),
-	//     group: CommonKeyEventGroup.FixedContent,
-	// },
 	[CommonKeyEventKey.FixedContentSaveToFile]: {
 		hotKey: getPlatformValue("Ctrl+S", "Meta+S"),
 		group: CommonKeyEventGroup.FixedContent,
@@ -75,27 +51,9 @@ export const defaultCommonKeyEventComponentConfig: Record<
 	CommonKeyEventComponentValue
 > = commonKeyEventSettingsKeys.reduce(
 	(acc, key) => {
-		let baseMessageId = "";
-		if (
-			defaultCommonKeyEventSettings[key as CommonKeyEventKey].group ===
-			CommonKeyEventGroup.Translation
-		) {
-			baseMessageId = "tools.translation";
-		} else if (
-			defaultCommonKeyEventSettings[key as CommonKeyEventKey].group ===
-			CommonKeyEventGroup.Chat
-		) {
-			baseMessageId = "tools.chat";
-		} else if (
-			defaultCommonKeyEventSettings[key as CommonKeyEventKey].group ===
-			CommonKeyEventGroup.FixedContent
-		) {
-			baseMessageId = "settings.hotKeySettings.fixedContent";
-		}
-
 		acc[key as CommonKeyEventKey] = {
 			...defaultCommonKeyEventSettings[key as CommonKeyEventKey],
-			messageId: `${baseMessageId}.${key}`,
+			messageId: `settings.hotKeySettings.fixedContent.${key}`,
 		};
 		return acc;
 	},

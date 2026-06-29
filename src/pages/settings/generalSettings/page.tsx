@@ -174,18 +174,11 @@ export const GeneralSettingsPage = () => {
 				value: DrawState.OcrDetect,
 			},
 			{
-				label: intl.formatMessage({ id: "draw.ocrTranslateTool" }),
-				value: DrawState.OcrTranslate,
-			},
-			{
 				label: intl.formatMessage({ id: "draw.scrollScreenshotTool" }),
 				value: DrawState.ScrollScreenshot,
 			},
 		].filter((item) => {
-			if (
-				item.value === DrawState.OcrDetect ||
-				item.value === DrawState.OcrTranslate
-			) {
+			if (item.value === DrawState.OcrDetect) {
 				return isReadyStatus(PLUGIN_ID_RAPID_OCR);
 			}
 

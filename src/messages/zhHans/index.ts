@@ -9,7 +9,6 @@ import { personalization } from "./personalization";
 import { plugin } from "./plugin";
 import { settings } from "./settings";
 import { tools } from "./tools";
-import { videoRecord } from "./videoRecord";
 
 export const zhHans = {
 	...menu,
@@ -20,7 +19,6 @@ export const zhHans = {
 	...common,
 	...fullScreenDraw,
 	...about,
-	...videoRecord,
 	...plugin,
 	...personalization,
 	...appearance,

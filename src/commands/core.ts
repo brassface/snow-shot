@@ -119,28 +119,8 @@ export const sendNewVersionNotification = async (
 	return result;
 };
 
-export const createVideoRecordWindow = async (
-	selectRectMinX: number,
-	selectRectMinY: number,
-	selectRectMaxX: number,
-	selectRectMaxY: number,
-) => {
-	const result = await invoke<void>("create_video_record_window", {
-		selectRectMinX,
-		selectRectMinY,
-		selectRectMaxX,
-		selectRectMaxY,
-	});
-	return result;
-};
-
-export const closeVideoRecordWindow = async () => {
-	const result = await invoke<void>("close_video_record_window");
-	return result;
-};
-
-export const hasVideoRecordWindow = async () => {
-	const result = await invoke<boolean>("has_video_record_window");
+export const showMainWindow = async (autoHide: boolean = false) => {
+	const result = await invoke<void>("show_main_window", { autoHide });
 	return result;
 };
 

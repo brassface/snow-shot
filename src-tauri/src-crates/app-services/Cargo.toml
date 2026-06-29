@@ -18,7 +18,7 @@ snow-shot-app-shared = { workspace = true }
 paddle-ocr-rs = "0.6.0"
 num_cpus = "1.17.0"
 ffmpeg-sidecar = "2.2.0"
-ort = { version = "2.0.0-rc.10", default-features = false }
+ort = { version = "2.0.0-rc.10", default-features = false, features = ["load-dynamic", "download-binaries", "copy-dylibs"] }
 
 [target.'cfg(any(target_os = "macos"))'.dependencies]
 xcap = { workspace = true }

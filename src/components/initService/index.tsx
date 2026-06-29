@@ -8,11 +8,7 @@ import {
 } from "@/commands/core";
 import { hotLoadPageInit } from "@/commands/hotLoadPage";
 import { ocrInit } from "@/commands/ocr";
-import { videoRecordInit } from "@/commands/videoRecord";
-import {
-	PLUGIN_ID_FFMPEG,
-	PLUGIN_ID_RAPID_OCR,
-} from "@/constants/pluginService";
+import { PLUGIN_ID_RAPID_OCR } from "@/constants/pluginService";
 import { usePluginServiceContext } from "@/contexts/pluginServiceContext";
 import { useAppSettingsLoad } from "@/hooks/useAppSettingsLoad";
 import { type AppSettingsData, AppSettingsGroup } from "@/types/appSettings";
@@ -164,27 +160,6 @@ export const InitService = () => {
 	useEffect(() => {
 		initServices();
 	}, [initServices]);
-
-	const hasInitVideoRecord = useRef(false);
-	useEffect(() => {
-		if (hasInitVideoRecord.current) {
-			return;
-		}
-
-		if (isReadyStatus?.(PLUGIN_ID_FFMPEG)) {
-			hasInitVideoRecord.current = true;
-
-			if (pluginConfigRef.current) {
-				pluginConfigRef.current
-					.getPluginDirPath(PLUGIN_ID_FFMPEG)
-					.then((ffmpegPluginDir) => {
-						videoRecordInit(ffmpegPluginDir);
-					});
-			} else {
-				appWarn("[InitService] pluginConfigRef.current is not set");
-			}
-		}
-	}, [isReadyStatus, pluginConfigRef]);
 
 	return null;
 };

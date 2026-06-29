@@ -545,11 +545,12 @@ const AppSettingsContextProviderCore: React.FC<{
 				const settingKeys: DrawToolbarKeyEventKey[] = Object.keys(
 					defaultDrawToolbarKeyEventSettings,
 				).filter((key) => {
-					if (
-						key === DrawToolbarKeyEventKey.OcrDetectTool ||
-						key === DrawToolbarKeyEventKey.OcrTranslateTool
-					) {
+					if (key === DrawToolbarKeyEventKey.OcrDetectTool) {
 						return isReady?.(PLUGIN_ID_RAPID_OCR);
+					}
+
+					if (key === DrawToolbarKeyEventKey.OcrTranslateTool) {
+						return false;
 					}
 
 					return true;
